@@ -29,7 +29,7 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
     return [
       new ContactCard(
         img: widget.avatar!,
-        id: widget.id!,
+        id: widget.id ?? '',
         title: widget.title,
         nickName: widget.title,
         area: '北京 海淀',
@@ -60,9 +60,7 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
         onPressed: () {
           log('to chat page');
           Get.off(new ChatPage(
-              id: widget.id!,
-              title: widget.title!,
-              type: ConversationType.V2TIM_C2C));
+              id: widget.id ?? '', title: widget.title!, type: ConversationType.V2TIM_C2C));
         },
       ),
       new Visibility(
@@ -84,10 +82,8 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
       new SizedBox(
         width: 60,
         child: new TextButton(
-          style:
-              ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.all(0))),
-          onPressed: () =>
-              friendItemDialog(context, userId: widget.id!, suCc: (v) {
+          style: ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.all(0))),
+          onPressed: () => friendItemDialog(context, userId: widget.id!, suCc: (v) {
             if (v) Navigator.of(context).maybePop();
           }),
           child: new Image.asset(contactAssets + 'ic_contacts_details.png'),
@@ -98,9 +94,7 @@ class _ContactsDetailsPageState extends State<ContactsDetailsPage> {
     return new Scaffold(
       backgroundColor: chatBg,
       appBar: new ComMomBar(
-          title: '',
-          backgroundColor: Colors.white,
-          rightDMActions: isSelf ? [] : rWidget),
+          title: '', backgroundColor: Colors.white, rightDMActions: isSelf ? [] : rWidget),
       body: new SingleChildScrollView(
         child: new Column(children: body(isSelf)),
       ),
